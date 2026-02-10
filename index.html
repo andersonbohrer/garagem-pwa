@@ -10,8 +10,8 @@
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
 
-  <!-- MQTT (CSP SAFE – SEM eval) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/mqttws31.min.js"></script>
+  <!-- MQTT LOCAL (CSP + CORB SAFE) -->
+  <script src="./paho-mqtt.min.js"></script>
 
   <style>
     body {
@@ -88,18 +88,14 @@
   };
 
   client.onMessageArrived = (message) => {
-    try {
-      const s = JSON.parse(message.payloadString);
+    const s = JSON.parse(message.payloadString);
 
-      setStatus("pergolado", s.pergolado);
-      setStatus("jardim", s.jardim_fundos);
+    setStatus("pergolado", s.pergolado);
+    setStatus("jardim", s.jardim_fundos);
 
-      document.getElementById("temp").innerText = s.temperatura;
-      document.getElementById("wifi").innerText = s.wifi_dbm;
-      document.getElementById("boot").innerText = s.boot_count;
-    } catch (e) {
-      console.error("JSON inválido", e);
-    }
+    document.getElementById("temp").innerText = s.temperatura;
+    document.getElementById("wifi").innerText = s.wifi_dbm;
+    document.getElementById("boot").innerText = s.boot_count;
   };
 
   client.connect({
