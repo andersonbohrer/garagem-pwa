@@ -10,7 +10,7 @@
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
 
-  <!-- MQTT (PAHO – SEM eval, compatível com GitHub Pages) -->
+  <!-- MQTT (PAHO – SEM EVAL, OK NO GITHUB PAGES) -->
   <script src="paho-mqtt.min.js"></script>
 
   <style>
@@ -31,10 +31,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,.1);
     }
 
-    .status {
-      font-weight: bold;
-    }
-
+    .status { font-weight: bold; }
     .on { color: green; }
     .off { color: red; }
 
@@ -46,15 +43,8 @@
       cursor: pointer;
     }
 
-    .btn-on {
-      background: #2ecc71;
-      color: white;
-    }
-
-    .btn-off {
-      background: #e74c3c;
-      color: white;
-    }
+    .btn-on { background: #2ecc71; color: white; }
+    .btn-off { background: #e74c3c; color: white; }
 
     .small {
       color: #666;
@@ -89,10 +79,13 @@
 </div>
 
 <script>
+  const clientId = "web_" + Math.random().toString(16).substr(2, 8);
+
   const client = new Paho.MQTT.Client(
     "3e533850c6644a06ac4bf2bfe62a37f3.s1.eu.hivemq.cloud",
     8884,
-    "web_" + Math.random().toString(16).substr(2, 8)
+    "/mqtt",
+    clientId
   );
 
   client.onConnectionLost = () => {
@@ -119,7 +112,7 @@
       client.subscribe("garagem/state");
     },
     onFailure: () => {
-      document.getElementById("mqtt").innerText = "Erro de conexão";
+      document.getElementById("mqtt").innerText = "Erro MQTT";
     }
   });
 
