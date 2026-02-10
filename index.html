@@ -10,8 +10,8 @@
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
 
-  <!-- MQTT LOCAL (CSP + CORB SAFE) -->
-  <script src="./paho-mqtt.min.js"></script>
+  <!-- MQTT (PAHO – SEM eval, compatível com GitHub Pages) -->
+  <script src="paho-mqtt.min.js"></script>
 
   <style>
     body {
@@ -31,7 +31,10 @@
       box-shadow: 0 2px 6px rgba(0,0,0,.1);
     }
 
-    .status { font-weight: bold; }
+    .status {
+      font-weight: bold;
+    }
+
     .on { color: green; }
     .off { color: red; }
 
@@ -43,13 +46,22 @@
       cursor: pointer;
     }
 
-    .btn-on { background: #2ecc71; color: white; }
-    .btn-off { background: #e74c3c; color: white; }
+    .btn-on {
+      background: #2ecc71;
+      color: white;
+    }
 
-    .small { color: #666; font-size: 13px; }
+    .btn-off {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .small {
+      color: #666;
+      font-size: 13px;
+    }
   </style>
 </head>
-
 <body>
 
 <h1>🏠 Garagem</h1>
@@ -107,7 +119,7 @@
       client.subscribe("garagem/state");
     },
     onFailure: () => {
-      document.getElementById("mqtt").innerText = "Erro MQTT";
+      document.getElementById("mqtt").innerText = "Erro de conexão";
     }
   });
 
