@@ -91,7 +91,7 @@
 </div>
 
 <script>
-  const client = mqtt.connect(
+  const client = MQTT.connect(
     'wss://3e533850c6644a06ac4bf2bfe62a37f3.s1.eu.hivemq.cloud:8884/mqtt',
     {
       username: 'bohrer01',
@@ -127,10 +127,6 @@
 
   function cmd(payload) {
     client.publish('garagem/command', JSON.stringify(payload));
-  }
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
   }
 </script>
 
